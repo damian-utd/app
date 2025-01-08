@@ -4,45 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menu Główne</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="styles/index.css">
+  <script src="renderer.js" defer></script>
 </head>
 <body>
-<div class="menu-container">
-<!--  <h1>Menu Główne</h1>-->
-  <div class="grid">
-    <!-- Główny raport danych -->
-    <div class="card" id="mainReport">
-      <div class="icon-container">
-        <img src="../icons/steering-wheel.svg" alt="Ikona sterowania" class="icon">
-        <img src="../icons/bar-chart.svg" alt="Ikona wykresu" class="icon">
+  <div class="menu-container" id="menu-container">
+  <!--  <h1>Menu Główne</h1>-->
+    <div class="grid">
+      <!-- Główny raport danych -->
+      <div class="card" id="main-report">
+        <div class="icon-container">
+          <img src="../icons/steering-wheel.svg" alt="Ikona sterowania" class="icon">
+          <img src="../icons/bar-chart.svg" alt="Ikona wykresu" class="icon">
+        </div>
+        <p>Data Report</p>
       </div>
-      <p>Główny raport danych</p>
-    </div>
 
-    <!-- Skrócony raport danych -->
-    <div class="card" id="shortReport">
-      <div class="icon-container">
-        <img src="../icons/graph.svg" alt="Ikona wykresu" class="icon">
+      <!-- Skrócony raport danych -->
+      <div class="card" id="short-report">
+        <div class="icon-container">
+          <img src="../icons/graph.svg" alt="Ikona wykresu" class="icon">
+        </div>
+        <p>Short Data Report</p>
       </div>
-      <p>Skrócony raport danych</p>
-    </div>
 
-    <!-- Ustawienia środowiska testowego -->
-    <div class="card" id="testSettings">
-      <div class="icon-container">
-        <img src="../icons/cube.svg" alt="Ikona środowiska" class="icon">
+      <!-- Ustawienia środowiska testowego -->
+      <div class="card" id="test-settings">
+        <div class="icon-container">
+          <img src="../icons/cube.svg" alt="Ikona środowiska" class="icon">
+        </div>
+        <p>Test Settings</p>
       </div>
-      <p>Ustawienia środowiska testowego</p>
-    </div>
 
-    <!-- Ustawienia ogólne -->
-    <div class="card" id="appSettings">
-      <div class="icon-container">
-        <img src="../icons/settings.svg" alt="Ikona ustawień" class="icon">
+      <!-- Ustawienia ogólne -->
+      <div class="card" id="general-settings">
+        <div class="icon-container">
+          <img src="../icons/settings.svg" alt="Ikona ustawień" class="icon">
+        </div>
+        <p>General Settings</p>
       </div>
-      <p>Ustawienia ogólne</p>
     </div>
   </div>
-</div>
 </body>
 </html>
