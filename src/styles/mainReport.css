@@ -10,11 +10,7 @@ body {
     grid-template-rows: repeat(10, 1fr);
 }
 
-.test-data-container{
-    grid-column: 2 / span 9;
-    grid-row: 1 / span 10;
-    background-color: lightblue;
-}
+/*            menu boczne                */
 
 .menu-container{
     grid-column: 1 / 2;
@@ -27,8 +23,14 @@ body {
 .menu-cards{
     border-bottom: 1px solid white;
     background-color: #c0c0c0;
+    display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.menu-cards:hover {
+    background-color: #b0b0b0;
+    cursor: pointer;
 }
 
 #menu-general-settings{
@@ -45,4 +47,35 @@ body {
 
 #menu-general-settings{
 
+}
+
+
+
+
+/*              dane testowe            */
+
+.test-data-container{
+    grid-column: 2 / span 9;
+    grid-row: 1 / span 10;
+    background-color: lightblue;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+#test-camera{
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 8;
+    background-color: red;
+}
+
+#test-gameplay{
+    grid-column: 5 / span 4;
+    grid-row: 1 / span 8;
+    background-color: orange;
+}
+
+#test-data-right{
+    grid-column: 9 / span 1;
+    grid-row: 1 / span 10;
 }

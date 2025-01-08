@@ -1,5 +1,5 @@
 // Pobieramy wszystkie elementy o klasie "card"
-const cards = document.getElementsByClassName("card");
+const cards = document.getElementsByClassName("menu-cards");
 
 // Iterujemy po kolekcji i dodajemy nasłuchiwacz zdarzeń dla każdego elementu
 Array.from(cards).forEach(card => {
@@ -8,18 +8,20 @@ Array.from(cards).forEach(card => {
         const cardId = card.id;
 
         switch (cardId) {
-            case 'main-report':
-                document.getElementById(cardId).addEventListener('click', () => {
-                    window.electronAPI.send('change-page', `/sub/mainReport.html`);
-                });
+            case 'menu-main-report':
+                window.electronAPI.send('change-page', `/sub/mainReport.html`);
                 break;
-            case 'short-report':
+            case 'menu-short-report':
+                window.electronAPI.send('change-page', `/sub/shortReport.html`);
                 break;
-            case 'test-settings':
-
+            case 'menu-test-settings':
+                window.electronAPI.send('change-page', `/sub/testSettings.html`);
                 break;
-            case 'general-settings':
-
+            case 'menu-general-settings':
+                window.electronAPI.send('change-page', `/sub/generalSettings.html`);
+                break;
+            case 'menu-main-site':
+                window.electronAPI.send('change-page', `/index.html`);
                 break;
             default:
                 alert("Nieznana karta");
