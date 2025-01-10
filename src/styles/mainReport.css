@@ -54,13 +54,13 @@ body {
 
 /*              dane testowe            */
 
-.test-data-container{
+.test-video-container{
     grid-column: 2 / span 9;
     grid-row: 1 / span 10;
     background-color: lightblue;
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
-    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
 }
 
 #test-camera{
