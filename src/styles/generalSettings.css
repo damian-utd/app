@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.header {
+    background-color: #d3d3d3;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.container {
+    width: 350px;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.icon-box:hover {
+    background-color: #007bff;
+    transform: scale(1.1);
+}
+
+.icon-box .icon {
+    font-size: 20px;
+    color: #333;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Suwak */
+input[type="range"] {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+/* Przycisk języka */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Menu */
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    width: 350px;
+}
+
+.menu-cards {
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.menu-cards:hover {
+    background-color: #007bff;
+    color: white;
+    transform: scale(1.05);
+}
+
+.menu-cards p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+
+.menu-cards#menu-main-site:hover {
+    background-color: #28a745;
+}
+
+.menu-cards#menu-short-report:hover {
+    background-color: #ffc107;
+}
+
+.menu-cards#menu-test-settings:hover {
+    background-color: #dc3545;
+}
+
+.menu-cards#menu-general-settings:hover {
+    background-color: #007bff;
+}
+

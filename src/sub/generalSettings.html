@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Settings</title>
+    <!-- Link do Font Awesome (w3.org) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../styles/generalSettings.css">
+    <script src="../renderer.js" defer></script>
 </head>
 <body>
+<div class="header">
+    <h1>General Settings</h1>
+</div>
 
+<div class="menu-container">
+    <div class="menu-cards" id="menu-main-site">
+        <p>Main Menu</p>
+    </div>
+    <div class="menu-cards" id="menu-short-report">
+        <p>Short Report</p>
+    </div>
+    <div class="menu-cards" id="menu-test-settings">
+        <p>Test Settings</p>
+    </div>
+    <div class="menu-cards" id="menu-general-settings">
+        <p>General Settings</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="option">
+        <div class="icon-text">
+            <i class="fas fa-volume-up icon"></i>
+            <span>Volume</span>
+        </div>
+        <input type="range" id="volume" min="0" max="100">
+    </div>
+
+
+    <div class="option">
+        <div class="icon-text">
+            <i class="fas fa-globe icon"></i>
+            <span>Language</span>
+        </div>
+        <button id="language-toggle">Polish</button>
+    </div>
+</div>
+
+<script>
+    const languageButton = document.getElementById('language-toggle');
+    languageButton.addEventListener('click', () => {
+        languageButton.textContent = languageButton.textContent === 'Polish' ? 'English' : 'Polish';
+    });
+</script>
 </body>
 </html>
