@@ -23,14 +23,18 @@ body {
 
 .menu-cards{
     border-bottom: 1px solid white;
-    background-color: #c0c0c0;
+    background-color: #1f1f1f;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.menu-cards:last-child{
+    border-bottom: none;
+}
+
 .menu-cards:hover {
-    background-color: #b0b0b0;
+    background-color: #454545;
     cursor: pointer;
 }
 
@@ -103,6 +107,18 @@ body {
 }
 
 
-#test-data-right{
+#test-data-bottom{
+    grid-column: 1 / span 5;
+    background-color: #14ec99;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
 
+.telemetry{
+    border-left: 1px solid black;
+    box-sizing: border-box;
+}
+
+.telemetry:first-child{
+    border: none;
 }
