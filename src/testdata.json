@@ -1,0 +1,19 @@
+{
+  "timestamp": 1676543210,
+  "steering_wheel": {
+    "angle": 15.75,
+    "angular_velocity": 5.2
+  },
+  "pedals": {
+    "throttle": 67,
+    "brake": 23,
+    "clutch": 0
+  },
+  "gear": 3,
+  "rpm": 3500,
+  "speed": 45.3,
+  "status": {
+    "connected": true,
+    "errors": []
+  }
+}

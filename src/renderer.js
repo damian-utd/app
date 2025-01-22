@@ -29,3 +29,33 @@ Array.from(cards).forEach(card => {
         }
     });
 });
+
+
+
+const camera = document.getElementById('main-camera');
+
+// Uzyskiwanie dostępu do kamerki
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        camera.srcObject = stream;
+        document.getElementById('sub-camera').srcObject = stream;
+    })
+    .catch(error => {
+        console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+    });
+
+const game = document.getElementById('sub-camera');
+
+// // Uzyskiwanie dostępu do kamerki
+// navigator.mediaDevices.getUserMedia({ video: true })
+//     .then(stream => {
+//         game.srcObject = stream;
+//     })
+//     .catch(error => {
+//         console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+//     });
+//
+document.getElementById('sub-camera').addEventListener('click', (e) => {
+
+
+})
