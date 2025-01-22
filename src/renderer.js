@@ -38,14 +38,14 @@ const camera = document.getElementById('main-camera');
 navigator.mediaDevices.getUserMedia({ video: true })
     .then(stream => {
         camera.srcObject = stream;
-        document.getElementById('sub-camera').srcObject = stream;
+        // document.getElementById('sub-camera').srcObject = stream;
     })
     .catch(error => {
         console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
     });
 
-const game = document.getElementById('sub-camera');
-
+// const game = document.getElementById('sub-camera');
+//
 // // Uzyskiwanie dostępu do kamerki
 // navigator.mediaDevices.getUserMedia({ video: true })
 //     .then(stream => {
@@ -54,8 +54,28 @@ const game = document.getElementById('sub-camera');
 //     .catch(error => {
 //         console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
 //     });
-//
-document.getElementById('sub-camera').addEventListener('click', (e) => {
-
-
-})
+let swap = true;
+document.getElementById('sub-camera').addEventListener('click', () => {
+    if (swap)
+    {
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(stream => {
+                document.getElementById("sub-camera").srcObject = stream;
+                document.getElementById('main-camera').srcObject = null;
+            })
+            .catch(error => {
+                console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+            });
+        swap = false;
+    }else{
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(stream => {
+                document.getElementById("sub-camera").srcObject = null;
+                document.getElementById('main-camera').srcObject = stream;
+            })
+            .catch(error => {
+                console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+            });
+        swap = true;
+    }
+});

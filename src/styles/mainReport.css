@@ -65,7 +65,7 @@ body {
 
 }
 
-#test-camera{
+#video-container{
     grid-row: 1 / span 3;
     grid-column: 1 / span 4;
     background-color: #63c776;
@@ -73,6 +73,7 @@ body {
     width: 100%; /* Opcjonalnie: ustaw szerokość nadrzędnego kontenera */
     height: 100%; /* Opcjonalnie: ustaw stałą wysokość, jeśli to potrzebne */
     overflow: hidden; /* Ukrywa zawartość wychodzącą poza obszar */
+    display: flex;
 }
 
 #main-camera{
@@ -80,22 +81,24 @@ body {
     transform: rotateY(180deg);
     width: 100%; /* Rozciągnięcie do pełnej szerokości rodzica */
     height: auto; /* Automatyczne skalowanie wysokości */
+    order: 1;
 }
 
 #sub-camera {
     position: absolute; /* Ustawia element względem rodzica */
     bottom: 10px; /* Odległość od dolnej krawędzi kontenera */
     right: 20px; /* Odległość od prawej krawędzi kontenera */
-    transform: rotateX(180deg); /* Obrót */
+    transform: rotateY(180deg); /* Obrót */
     width: 15%; /* Procent szerokości w stosunku do rodzica */
     height: auto; /* Automatyczna proporcja wysokości */
     border: 2px solid white; /* Dodaj ramkę (opcjonalnie) */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Opcjonalny cień */
     transition: transform 0.2s ease-in-out;
+    order: 2;
 }
 
 #sub-camera:hover{
-    transform: scale(1.1) rotateX(180deg);
+    transform: scale(1.1) rotateY(180deg);
     transition: transform 0.2s;
 }
 
