@@ -2,6 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <title>Main Report</title>
+    <link rel="stylesheet" href="../styles/shortReport.css">
+    <script src="../renderer.js" defer></script>
+    <script>
+        // Funkcja do odbioru danych na żywo
+        function readLiveData() {
+            "use strict";
+
+            // Symulacja odczytu danych na żywo co 1 sekundę
+            setInterval(() => {
+                const data = {
+                    timestamp: Date.now(),
+                    steering_wheel: {
+                        angle: (Math.random() * 90 - 45).toFixed(2),
+                        angular_velocity: (Math.random() * 20 - 10).toFixed(2)
+                    },
+                    pedals: {
+                        throttle: Math.floor(Math.random() * 101),
+                        brake: Math.floor(Math.random() * 101),
+                        clutch: Math.floor(Math.random() * 101)
+                    },
+                    gear: Math.floor(Math.random() * 6) + 1,
+                    rpm: Math.floor(Math.random() * 6201) + 800,
+                    speed: (Math.random() * 200).toFixed(1),
+                    status: {
+                        connected: true,
+                        errors: []
+                    }
+                };
+
+                processData(data);
+            }, 1000);
+        }
+
+        function processData(data) {
+            "use strict";
+
+            const displayArea = document.getElementById("liveData");
+
+            displayArea.innerHTML = `
+                <h3>Nowe dane</h3>
+                <p><strong>Czas:</strong> ${new Date(data.timestamp).toLocaleString()}</p>
+                <p><strong>Kierownica:</strong> Kąt = ${data.steering_wheel.angle}°, Prędkość kątowa = ${data.steering_wheel.angular_velocity}°/s</p>
+                <p><strong>Pedały:</strong> Gaz = ${data.pedals.throttle}%, Hamulec = ${data.pedals.brake}%, Sprzęgło = ${data.pedals.clutch}%</p>
+                <p><strong>Bieg:</strong> ${data.gear}</p>
+                <p><strong>Obroty silnika:</strong> ${data.rpm} RPM</p>
+                <p><strong>Prędkość:</strong> ${data.speed} km/h</p>
+                <p><strong>Status:</strong> Połączony = ${data.status.connected}, Błędy = ${data.status.errors.join(", ")}</p>
+            `;
+        }
+
+        // Uruchom funkcję odczytującą dane na żywo
+        readLiveData();
+    </script>
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu-cards" id="menu-main-site">
+        <p>Main Menu</p>
+    </div>
+    <div class="menu-cards" id="menu-short-report">
+        <p>Short Report</p>
+    </div>
+    <div class="menu-cards" id="menu-test-settings">
+        <p>Test Settings</p>
+    </div>
+    <div class="menu-cards" id="menu-general-settings">
+        <p>General Settings</p>
+    </div>
+</div>
+
+<div id="liveData" class="data-container">
+    <h3>Live Data</h3>
+    <p>Waiting for data...</p>
+</div>
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu z Danymi</title>
     <style>
@@ -68,5 +146,6 @@
     <p>To jest przykładowy tekst, który można zmienić na rzeczywiste dane. Możesz tutaj umieścić wszystko, co chcesz wyświetlić, np. dane z API, tabele, czy grafiki.</p>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae augue ligula. Proin ac varius lorem. Sed pharetra, tortor non fermentum facilisis, lorem felis fermentum felis, vitae aliquam nunc lacus vel urna.</p>
 </div>
+
 </body>
 </html>
