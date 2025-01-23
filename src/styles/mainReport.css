@@ -106,7 +106,6 @@ body {
     transition: transform 0.2s;
 }
 
-
 #test-data-bottom{
     grid-column: 1 / span 5;
     background-color: #14ec99;
@@ -117,8 +116,53 @@ body {
 .telemetry{
     border-left: 1px solid black;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .telemetry:first-child{
     border: none;
+}
+
+.icon {
+    width: 60%;
+    height: 60%;
+    margin: 10%;
+}
+
+#wheel-progress{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#wheel-progress-left, #wheel-progress-right{
+    width : 40%;
+    height: 40%;
+}
+
+#wheel-progress-left{
+    background: linear-gradient(
+            90deg in oklab,
+            red,
+            /*orange,*/
+            yellow,
+            #03cf03
+    );
+    border-radius: 10px 0 0 10px;
+}
+
+#wheel-progress-right{
+    background: linear-gradient(
+            90deg in oklab,
+            #03cf03,
+            yellow,
+            red
+    );
+    border-radius: 0 10px 10px 0;
 }
