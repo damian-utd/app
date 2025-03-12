@@ -39,7 +39,7 @@ const camera = document.getElementById('main-camera');
 // Uzyskiwanie dostępu do kamerki
 navigator.mediaDevices.getUserMedia({ video: true })
     .then(stream => {
-        camera.srcObject = stream;
+        // camera.srcObject = stream;
         // document.getElementById('sub-camera').srcObject = stream;
     })
     .catch(error => {
