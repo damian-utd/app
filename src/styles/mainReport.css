@@ -108,7 +108,7 @@ body {
 
 #test-data-bottom{
     grid-column: 1 / span 5;
-    background-color: #14ec99;
+    background-color: #555555;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
@@ -239,7 +239,36 @@ body {
     overflow: clip;
 }
 
+.telemetry.gears{
+    grid-column: 4 / span 2;
+}
 
+.gearbox{
+    width: 80%;
+    height: 70%;
+    background-color: #242323;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    place-items: center;
+    border-radius: 50px;
+}
+
+.gear{
+    width: 50%;
+    aspect-ratio: 1/1;
+    background-color: #454545;
+    border-radius: 50%;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    color: white;
+}
+
+.blank{
+    background-color: transparent;
+}
 
 
 
