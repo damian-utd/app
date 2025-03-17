@@ -46,16 +46,16 @@ navigator.mediaDevices.getUserMedia({ video: true })
         console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
     });
 
-// const game = document.getElementById('sub-camera');
-//
-// // Uzyskiwanie dostępu do kamerki
-// navigator.mediaDevices.getUserMedia({ video: true })
-//     .then(stream => {
-//         game.srcObject = stream;
-//     })
-//     .catch(error => {
-//         console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
-//     });
+const game = document.getElementById('sub-camera');
+
+// Uzyskiwanie dostępu do kamerki
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        game.srcObject = stream;
+    })
+    .catch(error => {
+        console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+    });
 let swap = true;
 document.getElementById('sub-camera').addEventListener('click', () => {
     if (swap)

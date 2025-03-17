@@ -126,13 +126,13 @@ body {
     border: none;
 }
 
-.icon {
+#wheel-icon {
     width: 60%;
     height: 60%;
     margin: 10%;
 }
 
-#wheel-progress{
+#wheel-progress-bar{
     width : 80%;
     height: 8%;
 
@@ -188,7 +188,58 @@ body {
     justify-self: right;
 }
 
-
-#wheel-icon{
-    transform: rotateZ(0deg);
+.pedal-icon{
+    width: 10vw;
 }
+
+.pedals{
+    /*background-color: white;*/
+    display: grid;
+    grid-column: 2/ span 2;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.pedal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.clutch{
+    grid-column: 1 / span 1;
+    height: 100%;
+
+}
+
+.pedal-progress-bar{
+    width : 10%;
+    height: 20vh;
+
+    /*background-color: #1f1f1f;*/
+    background: linear-gradient(
+            0deg in oklab,
+            #03cf03,
+            yellow,
+            red
+    );
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pedal-progress{
+    background-color: #454545;
+    mask-image: radial-gradient(circle at bottom, transparent 0, transparent 15px, black 10px);
+    border-radius: 10px     ;
+    height: 50%;
+    width: 100%;
+
+    justify-self: left;
+    overflow: clip;
+}
+
+
+
+
+
