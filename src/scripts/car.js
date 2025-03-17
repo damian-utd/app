@@ -38,7 +38,6 @@ function WheelUpdate(turn){
 
     rotation.style.transform = `rotateZ(${turn}deg)`;
 
-
 }
 
 let i = 0;
@@ -61,5 +60,79 @@ async function loopWheel() {
     }
 }
 
+// .gear:not(.blank):hover {
+//     background-color: #868686;
+//     color: #242323;
+// }
+{
+    let lastGear;
+
+    function gearUpdate(state) {
+        console.log(state)
+
+        if(lastGear){
+            lastGear.style.backgroundColor = '#454545';
+            lastGear.style.color = '#fff';
+        }
+
+        let gear;
+        switch (state) {
+            case -1:
+                lastGear = gear = document.getElementById("gearRev");
+                break;
+            case 1:
+                lastGear = gear = document.getElementById("gear1");
+                break;
+            case 2:
+                lastGear = gear = document.getElementById("gear2");
+                break;
+            case 3:
+                lastGear = gear = document.getElementById("gear3");
+                break;
+            case 4:
+                lastGear = gear = document.getElementById("gear4");
+                break;
+            case 5:
+                lastGear = gear = document.getElementById("gear5");
+                break;
+            case 6:
+                lastGear = gear = document.getElementById("gear6");
+                break;
+            case 7:
+                lastGear = gear = document.getElementById("gear7");
+                break;
+            default:
+                break;
+        }
+        if (gear) {
+            gear.style.backgroundColor = '#868686';
+            gear.style.color = '#242323';
+        }
+
+    }
+
+    async function loopGear() {
+        let direction = 1; // -1 oznacza zmniejszanie wartości, 1 oznacza zwiększanie
+        let i = -1;
+
+        while (true) {
+            await sleep(500);
+            gearUpdate(i);
+
+            if (i === -1) {
+                direction = 1; // Zmiana kierunku na rosnący
+            } else if (i === 7) {
+                direction = -1; // Zmiana kierunku na malejący
+            }
+
+            i += direction;
+        }
+    }
+
+    loopGear();
+}
+
 loopWheel();
+
+
 
