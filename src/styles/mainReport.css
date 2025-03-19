@@ -23,14 +23,18 @@ body {
 
 .menu-cards{
     border-bottom: 1px solid white;
-    background-color: #c0c0c0;
+    background-color: #1f1f1f;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.menu-cards:last-child{
+    border-bottom: none;
+}
+
 .menu-cards:hover {
-    background-color: #b0b0b0;
+    background-color: #454545;
     cursor: pointer;
 }
 
@@ -65,7 +69,7 @@ body {
 
 }
 
-#test-camera{
+#video-container{
     grid-row: 1 / span 3;
     grid-column: 1 / span 4;
     background-color: #63c776;
@@ -73,6 +77,7 @@ body {
     width: 100%; /* Opcjonalnie: ustaw szerokość nadrzędnego kontenera */
     height: 100%; /* Opcjonalnie: ustaw stałą wysokość, jeśli to potrzebne */
     overflow: hidden; /* Ukrywa zawartość wychodzącą poza obszar */
+    display: flex;
 }
 
 #main-camera{
@@ -80,26 +85,190 @@ body {
     transform: rotateY(180deg);
     width: 100%; /* Rozciągnięcie do pełnej szerokości rodzica */
     height: auto; /* Automatyczne skalowanie wysokości */
+    order: 1;
 }
 
 #sub-camera {
     position: absolute; /* Ustawia element względem rodzica */
     bottom: 10px; /* Odległość od dolnej krawędzi kontenera */
     right: 20px; /* Odległość od prawej krawędzi kontenera */
-    transform: rotateX(180deg); /* Obrót */
+    transform: rotateY(180deg); /* Obrót */
     width: 15%; /* Procent szerokości w stosunku do rodzica */
     height: auto; /* Automatyczna proporcja wysokości */
     border: 2px solid white; /* Dodaj ramkę (opcjonalnie) */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Opcjonalny cień */
     transition: transform 0.2s ease-in-out;
+    order: 2;
 }
 
 #sub-camera:hover{
-    transform: scale(1.1) rotateX(180deg);
+    transform: scale(1.1) rotateY(180deg);
     transition: transform 0.2s;
 }
 
+#test-data-bottom{
+    grid-column: 1 / span 5;
+    background-color: #555555;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
 
-#test-data-right{
+.telemetry{
+    border-left: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.telemetry:first-child{
+    border: none;
+}
+
+#wheel-icon {
+    width: 60%;
+    height: 60%;
+    margin: 10%;
+}
+
+#wheel-progress-bar{
+    width : 80%;
+    height: 8%;
+
+    /*background-color: #1f1f1f;*/
+    background: linear-gradient(
+            90deg in oklab,
+            red,
+            yellow,
+            #03cf03,
+            #03cf03,
+            yellow,
+            red
+    );
+    margin-bottom: 2%;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
 
 }
+
+#wheel-progress-left, #wheel-progress-right{
+    height: 100%;
+}
+
+#wheel-progress-left{
+    /*background: linear-gradient(*/
+    /*        90deg in oklab,*/
+    /*        #03cf03,*/
+    /*        yellow,*/
+    /*        red*/
+    /*);*/
+    background-color: #454545;
+    mask-image: radial-gradient(circle at left, transparent 0, transparent 10px, black 10px);
+    border-radius: 0 10px 10px 0;
+    width: 110%;
+    transform: rotateZ(180deg);
+    justify-self: left;
+    overflow: clip;
+}
+
+#wheel-progress-right{
+    /*background: linear-gradient(*/
+    /*        90deg in oklab,*/
+    /*        #03cf03,*/
+    /*        yellow,*/
+    /*        red*/
+    /*);*/
+    background-color: #454545;
+    mask-image: radial-gradient(circle at left, transparent 0, transparent 10px, black 10px);
+    border-radius: 0 10px 10px 0;
+    width: 110%;
+    justify-self: right;
+}
+
+.pedal-icon{
+    width: 10vw;
+}
+
+.pedals{
+    /*background-color: white;*/
+    display: grid;
+    grid-column: 2/ span 2;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.pedal{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.clutch{
+    grid-column: 1 / span 1;
+    height: 100%;
+
+}
+
+.pedal-progress-bar{
+    width : 10%;
+    height: 20vh;
+
+    /*background-color: #1f1f1f;*/
+    background: linear-gradient(
+            0deg in oklab,
+            #03cf03,
+            yellow,
+            red
+    );
+
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pedal-progress{
+    background-color: #454545;
+    mask-image: radial-gradient(circle at bottom, transparent 0, transparent 15px, black 10px);
+    border-radius: 10px     ;
+    height: 50%;
+    width: 100%;
+
+    justify-self: left;
+    overflow: clip;
+}
+
+.telemetry.gears{
+    grid-column: 4 / span 2;
+}
+
+.gearbox{
+    width: 80%;
+    height: 70%;
+    background-color: #242323;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    place-items: center;
+    border-radius: 50px;
+}
+
+.gear{
+    width: 50%;
+    aspect-ratio: 1/1;
+    background-color: #454545;
+    border-radius: 50%;
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    color: white;
+}
+
+.blank{
+    background-color: transparent;
+}
+
+
+
