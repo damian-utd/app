@@ -32,52 +32,83 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+{
+    // załadowanie kamerki na małe okno
+    const game = document.getElementById('sub-camera');
 
+    // Uzyskiwanie dostępu do kamerki
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            game.srcObject = stream;
+        })
+        .catch(error => {
+            console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+        });
+}
 
-const camera = document.getElementById('main-camera');
+{
+    // obsługa zmiany okienka kamerek
+    let swap = true;
 
-// Uzyskiwanie dostępu do kamerki
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        // camera.srcObject = stream;
-        // document.getElementById('sub-camera').srcObject = stream;
-    })
-    .catch(error => {
-        console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+    document.getElementById('sub-camera').addEventListener('click', () => {
+        if (swap) {
+            navigator.mediaDevices.getUserMedia({video: true})
+                .then(stream => {
+                    document.getElementById("sub-camera").srcObject = stream;
+                    document.getElementById('main-camera').srcObject = null;
+                })
+                .catch(error => {
+                    console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+                });
+            swap = false;
+        } else {
+            navigator.mediaDevices.getUserMedia({video: true})
+                .then(stream => {
+                    document.getElementById("sub-camera").srcObject = null;
+                    document.getElementById('main-camera').srcObject = stream;
+                })
+                .catch(error => {
+                    console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+                });
+            swap = true;
+        }
     });
 
-const game = document.getElementById('sub-camera');
+}
 
-// Uzyskiwanie dostępu do kamerki
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        game.srcObject = stream;
-    })
-    .catch(error => {
-        console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
-    });
-let swap = true;
-document.getElementById('sub-camera').addEventListener('click', () => {
-    if (swap)
-    {
-        navigator.mediaDevices.getUserMedia({video: true})
-            .then(stream => {
-                document.getElementById("sub-camera").srcObject = stream;
-                document.getElementById('main-camera').srcObject = null;
-            })
-            .catch(error => {
-                console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
+window.addEventListener('DOMContentLoaded', () => {
+    console.log("Kod renderer.js uruchomiony!");
+
+    (async () => {
+        try {
+            // Pobierz ID okna, które chcemy przechwycić
+            const sourceId = await window.electronAPI.getWindowSources();
+            console.log('Wybrane okno gry ID:', sourceId);
+
+            // Uzyskaj strumień wideo z tego okna
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    mandatory: {
+                        chromeMediaSource: 'desktop',
+                        chromeMediaSourceId: sourceId
+                    }
+                }
             });
-        swap = false;
-    }else{
-        navigator.mediaDevices.getUserMedia({video: true})
-            .then(stream => {
-                document.getElementById("sub-camera").srcObject = null;
-                document.getElementById('main-camera').srcObject = stream;
-            })
-            .catch(error => {
-                console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
-            });
-        swap = true;
-    }
+
+            // Znajdź element <video> na stronie
+            const videoElement = document.getElementById('main-camera');
+
+            // Przypisz strumień wideo do tagu <video>
+            videoElement.srcObject = stream;
+            videoElement.play();  // Uruchom odtwarzanie wideo
+
+        } catch (error) {
+            console.error('Błąd przechwytywania strumienia:', error);
+        }
+    })();
 });
+
+
+
+
+

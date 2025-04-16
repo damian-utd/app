@@ -64,50 +64,51 @@ body {
     grid-row: 1 / span 9;
     background-color: lightblue;
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(8, 1fr);
     grid-template-columns: repeat(5, 1fr);
 
 }
 
-#video-container{
-    grid-row: 1 / span 3;
+#video-container {
+    grid-row: 1 / span 6;
     grid-column: 1 / span 4;
     background-color: #63c776;
     position: relative; /* Konieczne, aby elementy wewnętrzne odnosiły się do tego kontenera */
-    width: 100%; /* Opcjonalnie: ustaw szerokość nadrzędnego kontenera */
-    height: 100%; /* Opcjonalnie: ustaw stałą wysokość, jeśli to potrzebne */
+    height: 100%; /* Opcjonalnie: ustaw szerokość nadrzędnego kontenera */
+    aspect-ratio: 16 / 9;
     overflow: hidden; /* Ukrywa zawartość wychodzącą poza obszar */
-    display: flex;
 }
 
-#main-camera{
+#main-camera {
     position: absolute;
-    transform: rotateY(180deg);
     width: 100%; /* Rozciągnięcie do pełnej szerokości rodzica */
     height: auto; /* Automatyczne skalowanie wysokości */
     order: 1;
+    z-index: 1; /* Ustawiamy główną kamerę na warstwie 1 */
 }
 
 #sub-camera {
-    position: absolute; /* Ustawia element względem rodzica */
-    bottom: 10px; /* Odległość od dolnej krawędzi kontenera */
-    right: 20px; /* Odległość od prawej krawędzi kontenera */
-    transform: rotateY(180deg); /* Obrót */
-    width: 15%; /* Procent szerokości w stosunku do rodzica */
-    height: auto; /* Automatyczna proporcja wysokości */
-    border: 2px solid white; /* Dodaj ramkę (opcjonalnie) */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Opcjonalny cień */
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    width: 15%;
+    height: auto;
+    border: 2px solid white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease-in-out;
     order: 2;
+    z-index: 2; /* Ustawiamy sub kamerę na warstwie 2, żeby była nad główną */
 }
 
+
 #sub-camera:hover{
-    transform: scale(1.1) rotateY(180deg);
+    transform: scale(1.1);
     transition: transform 0.2s;
 }
 
 #test-data-bottom{
     grid-column: 1 / span 5;
+    grid-row: 7 / span 2;
     background-color: #555555;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -120,6 +121,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    object-fit: contain;
 }
 
 .telemetry:first-child{
@@ -129,10 +132,10 @@ body {
 #wheel-icon {
     width: 60%;
     height: 60%;
-    margin: 10%;
 }
 
 #wheel-progress-bar{
+    margin-top: 5%;
     width : 80%;
     height: 8%;
 
@@ -159,12 +162,6 @@ body {
 }
 
 #wheel-progress-left{
-    /*background: linear-gradient(*/
-    /*        90deg in oklab,*/
-    /*        #03cf03,*/
-    /*        yellow,*/
-    /*        red*/
-    /*);*/
     background-color: #454545;
     mask-image: radial-gradient(circle at left, transparent 0, transparent 10px, black 10px);
     border-radius: 0 10px 10px 0;
