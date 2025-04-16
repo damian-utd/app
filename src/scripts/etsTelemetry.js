@@ -18,16 +18,7 @@ function wheelUpdate(gameSteer, userClutch, userBrake, userThrottle) {
     }
     else if (gameSteer < 0){
         moveLeft.style.width = `${(1-(gameSteer*(-1))) * 110}%`;
-        // console.log(-1 * (1+gameSteer))
     }
-    // if (gameSteer > 0) {
-    //     moveRight.style.width = `${(1-gameSteer) * 110}%`;
-    //     moveLeft.style.width = `110%`;
-    // } else {
-    //     moveLeft.style.width = `${(1-gameSteer) * 110}%`;
-    //     moveRight.style.width = `110%`;
-    // }
-
     clutch_progress.style.height = `${(1-userClutch) * 110}%`;
     break_progress.style.height = `${(1-userBrake) * 110}%`;
     throttle_progress.style.height = `${(1-userThrottle) * 110}%`;
@@ -103,18 +94,13 @@ async function fetchData(url) {
 async function loopFetch() {
     while (true) {
         await sleep(10);
-        const data = await fetchData("http://82.145.73.127:25555/api/ets2/telemetry");
+        // const data = await fetchData("http://82.145.73.127:25555/api/ets2/telemetry"); // ZUT
+        const data = await fetchData("http://192.168.1.11:25555/api/ets2/telemetry"); // DOM
         if (data) {
             wheelUpdate(data.gameSteer, data.userClutch, data.userBrake, data.userThrottle);
             gearUpdate(data.shifterSlot);
-
-            for (let key in data) {
-                // console.log(key, data[key]); // Klucz i jego wartość
-            }
-
         }
     }
 }
 
-// Uruchamiamy pętlę pobierania i aktualizacji danych
 loopFetch();
