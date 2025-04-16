@@ -75,3 +75,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+    console.log("Kod renderer.js uruchomiony!");
+
+    (async () => {
+        try {
+            // Pobierz ID okna, które chcemy przechwycić
+            const sourceId = await window.electronAPI.getWindowSources();
+            console.log('Wybrane okno gry ID:', sourceId);
+
+            // Uzyskaj strumień wideo z tego okna
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: {
+                    mandatory: {
+                        chromeMediaSource: 'desktop',
+                        chromeMediaSourceId: sourceId
+                    }
+                }
+            });
+
+            // Znajdź element <video> na stronie
+            const videoElement = document.getElementById('main-camera');
+
+            // Przypisz strumień wideo do tagu <video>
+            videoElement.srcObject = stream;
+            videoElement.play();  // Uruchom odtwarzanie wideo
+
+        } catch (error) {
+            console.error('Błąd przechwytywania strumienia:', error);
+        }
+    })();
+});
+
+
+
+
+
