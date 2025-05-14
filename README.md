@@ -49,7 +49,7 @@ Aplikacja umożliwia zbieranie i wizualizację danych sprzętowych oraz pomiaró
 
 4. (Opcjonalnie) Sklonuj repozytorium:
    ```bash
-   git clone https://github.com/nazwa-uzytkownika/nazwa-repozytorium.git
+   git clone https://github.com/damian-utd/app.git
    cd nazwa-repozytorium
    ```
 
