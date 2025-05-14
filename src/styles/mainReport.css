@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #1f1f1f;
     color: #fff;
     height: 100vh;
@@ -10,32 +10,46 @@ body {
     grid-template-rows: repeat(9, 1fr);
 }
 
-/*            menu boczne                */
-
-.menu-container{
+/* ===== MENU BOCZNE ===== */
+.menu-container {
     grid-column: 1 / span 1;
     grid-row: 1 / span 9;
-    height: 100%;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
+    background-color: #2a2a2a;
+    border-right: 1px solid #444;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    padding: 1rem
+}
+
+.menu-cards {
+    margin: 0.5rem 0;
+    background-color: #333;
+    border-radius: 12px;
+    display: flex;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     text-align: center;
 }
 
-.menu-cards{
-    border-bottom: 1px solid white;
-    background-color: #1f1f1f;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.menu-cards:last-child{
-    border-bottom: none;
-}
-
 .menu-cards:hover {
-    background-color: #454545;
+    background-color: #444;
+    transform: scale(1.02);
     cursor: pointer;
+}
+
+.menu-cards i {
+    /*font-size: 1.2rem;*/
+    color: #f0f0f0;
+}
+
+/* Usunięcie dolnej krawędzi tylko w ostatnim */
+.menu-cards:last-child {
+    margin-bottom: 1rem;
 }
 
 #menu-general-settings{

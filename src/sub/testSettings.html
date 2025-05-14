@@ -1,74 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Settings</title>
-    <!-- Link do Font Awesome (ikony, w tym pogoda) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../styles/testSettings.css">
-    <script src="../renderer.js" defer></script>
-</head>
-<body>
-<div class="header">
-    <h1>Test Settings</h1>
-</div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test Settings</title>
+        <link rel="stylesheet" href="../styles/testSettings.css">
+        <script src="../renderer.js" defer></script>
+    </head>
+    <body>
+    <div class="header">
+        <h1>Test Settings</h1>
+    </div>
 
-<div class="menu-container">
-    <div class="menu-cards" id="menu-main-site">
-        <p>Main Menu</p>
-    </div>
-    <div class="menu-cards" id="menu-short-report">
-        <p>Short Report</p>
-    </div>
-    <div class="menu-cards" id="menu-test-settings">
-        <p>Test Settings</p>
-    </div>
-    <div class="menu-cards" id="menu-general-settings">
-        <p>General Settings</p>
-    </div>
-</div>
-    <div class="container">
-
-        <div class="option">
-            <div class="icon-text">
-                <i class="fas fa-cloud icon"></i>
-                <span>Warunki pogody</span>
-            </div>
-            <select id="weather-condition">
-                <option value="clear">Słonecznie</option>
-                <option value="cloudy">Pochmurno</option>
-                <option value="rainy">Deszczowo</option>
-                <option value="stormy">Burzowo</option>
-            </select>
+    <div class="menu-container">
+        <div class="menu-cards" id="menu-main-site">
+            <p>Main Menu</p>
         </div>
-
-        <div class="option">
-            <div class="icon-text">
-                <i class="fas fa-clock icon"></i>
-                <span>Czas trwania testu</span>
-            </div>
-            <select id="test-duration">
-                <option value="1">1 minuta</option>
-                <option value="2">2 minuty</option>
-                <option value="5">5 minut</option>
-                <option value="10">10 minut</option>
-            </select>
+        <div class="menu-cards" id="menu-main-report">
+            <p>Main Report</p>
+        </div>
+        <div class="menu-cards" id="menu-short-report">
+            <p>Short Report</p>
+        </div>
+        <div class="menu-cards" id="menu-general-settings">
+            <p>General Settings</p>
         </div>
     </div>
-</div>
 
-<script>
-    const weatherSelect = document.getElementById('weather-condition');
-    const durationSelect = document.getElementById('test-duration');
+    <div class="settings-container">
 
-    weatherSelect.addEventListener('change', function() {
-        console.log(`Wybrano warunki pogody: ${weatherSelect.value}`);
-    });
+    </div>
 
-    durationSelect.addEventListener('change', function() {
-        console.log(`Wybrano czas trwania testu: ${durationSelect.value} minut`);
-    });
-</script>
-</body>
+
+
+
+
+    </body>
 </html>
