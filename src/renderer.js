@@ -46,36 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 }
 
-{
-    // obsługa zmiany okienka kamerek
-    let swap = true;
-
-    document.getElementById('sub-camera').addEventListener('click', () => {
-        if (swap) {
-            navigator.mediaDevices.getUserMedia({video: true})
-                .then(stream => {
-                    document.getElementById("sub-camera").srcObject = stream;
-                    document.getElementById('main-camera').srcObject = null;
-                })
-                .catch(error => {
-                    console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
-                });
-            swap = false;
-        } else {
-            navigator.mediaDevices.getUserMedia({video: true})
-                .then(stream => {
-                    document.getElementById("sub-camera").srcObject = null;
-                    document.getElementById('main-camera').srcObject = stream;
-                })
-                .catch(error => {
-                    console.error('Błąd podczas uzyskiwania dostępu do kamerki:', error);
-                });
-            swap = true;
-        }
-    });
-
-}
-
 window.addEventListener('DOMContentLoaded', () => {
     console.log("Kod renderer.js uruchomiony!");
 
@@ -108,7 +78,29 @@ window.addEventListener('DOMContentLoaded', () => {
     })();
 });
 
+function swapVideoStreams() {
+    const mainCamera = document.getElementById('main-camera');
+    const subCamera = document.getElementById('sub-camera');
 
+    // Zapamiętaj obecne strumienie
+    const mainStream = mainCamera.srcObject;
+    const subStream = subCamera.srcObject;
+
+    // Zamień strumienie
+    mainCamera.srcObject = subStream;
+    subCamera.srcObject = mainStream;
+
+    // Zamień style transform
+    const mainTransform = mainCamera.style.transform;
+    const subTransform = subCamera.style.transform;
+
+    mainCamera.style.transform = subTransform;
+    subCamera.style.transform = mainTransform;
+}
+
+
+// Przykład użycia: podpięcie pod przycisk
+document.getElementById('sub-camera').addEventListener('click', swapVideoStreams);
 
 
 
