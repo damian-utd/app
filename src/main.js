@@ -6,15 +6,15 @@ let win;
 
 const createWindows = () => {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        // width: 800,
+        // height: 600,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             contextIsolation: true,
             nodeIntegration: false,
         }
     })
-
+    win.maximize();
     win.loadFile(path.join(__dirname, "index.html"));
 
     ipcMain.on('change-page', (event, fileName) => {
