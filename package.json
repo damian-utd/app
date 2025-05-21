@@ -4,12 +4,15 @@
   "description": "UI",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "server": "node server.js"
   },
   "author": "Damian Ratańczuk",
   "license": "ISC",
   "devDependencies": {
     "electron": "^33.2.1"
+  },
+  "dependencies": {
+    "ws": "^8.18.2"
   }
 }
-
