@@ -5,7 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
-    "server": "node server.js"
+    "server": "node src/scripts/server.js"
   },
   "author": "Damian Ratańczuk",
   "license": "ISC",

@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="../styles/mainReport.css">
         <script src="../renderer.js" defer></script>
         <script src="../scripts/etsTelemetry.js" defer></script>
+        <script src="../scripts/timer.js" defer></script>
     </head>
     <body>
         <div class="menu-container">
@@ -23,13 +24,19 @@
             </div>
         </div>
         <div class="test-data-container">
-            <div id="video-container">
-                <video id="main-camera" autoplay></video>
-                <video id="sub-camera" autoplay style="transform: scaleX(-1);"></video>
+            <div class="video-and-right">
+                <div id="video-container">
+                    <video id="main-camera" autoplay></video>
+                    <video id="sub-camera" autoplay style="transform: scaleX(-1);"></video>
+                </div>
+                <div class="test-data-right" id="test-data-right">
+                    <div class="right-container" id="right-container">
+                        <div class="start-stop-button" id="start-stop-button">Start</div>
+                        <div class="timer-container" id="timer-container">00:00:00</div>
+                    </div>
+                </div>
             </div>
-            <div class="test-data-right" id="test-data-right">
 
-            </div>
             <div class="test-data-bottom" id="test-data-bottom">
                 <div class="telemetry">
 

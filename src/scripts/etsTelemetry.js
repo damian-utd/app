@@ -95,8 +95,8 @@ async function loopFetch() {
     while (true) {
         await sleep(10);
         // const data = await fetchData("http://82.145.73.127:25555/api/ets2/telemetry"); // ZUT
-        // const data = await fetchData("http://192.168.1.11:25555/api/ets2/telemetry"); // DOM
-        const data = await fetchData("http://192.168.56.1:25555/api/ets2/telemetry"); // laptop siec ZUT
+        const data = await fetchData("http://192.168.1.11:25555/api/ets2/telemetry"); // DOM
+        // const data = await fetchData("http://192.168.56.1:25555/api/ets2/telemetry"); // laptop siec ZUT
 
         if (data) {
             wheelUpdate(data.gameSteer, data.userClutch, data.userBrake, data.userThrottle);
