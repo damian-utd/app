@@ -23,8 +23,9 @@ const createWindows = () => {
 
 }
 
+app.whenReady().then(createWindows);
+
 app.whenReady().then(() => {
-    createWindows()
 
     ipcMain.handle('get-window-sources', async () => {
         console.log('[MAIN] Handler wywolany'); // Bez polskich znaków

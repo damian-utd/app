@@ -98,9 +98,9 @@ function swapVideoStreams() {
     subCamera.style.transform = mainTransform;
 }
 
-
-// Przykład użycia: podpięcie pod przycisk
 document.getElementById('sub-camera').addEventListener('click', swapVideoStreams);
+
+
 
 
 
