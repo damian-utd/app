@@ -1,16 +1,3 @@
-window.addEventListener('DOMContentLoaded', () => {
-    let button = document.getElementById('start-stop-button');
-    let timer = document.getElementById('timer-container');
-    button.addEventListener('click', (e) => {
-        if (button.innerText === 'Start') {
-            StartToStop(button, timer);
-        }
-        else if (button.innerText === 'Stop') {
-            StopToStart(button, timer);
-        }
-    })
-})
-
 let interval = null;
 
 function StartToStop(button, timer) {

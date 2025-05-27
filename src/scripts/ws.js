@@ -2,11 +2,12 @@
 // WEBSOCKET
 
 window.addEventListener('DOMContentLoaded', () => {
-    const select = document.getElementById('driver-settings');
-    const status = document.getElementById('status');
+    let select = document.getElementById('driver-settings');
+    let status = document.getElementById('status');
 
     // Inicjalizacja WS (jeśli już istnieje, nie zrobi nic)
-    window.electronAPI.initWebSocket('ws://192.168.56.1:8080');
+    // window.electronAPI.initWebSocket('ws://192.168.56.1:8080'); // ZUT LAPTOP
+    window.electronAPI.initWebSocket('ws://192.168.1.11:8080'); // DOM
 
     window.addEventListener('ws-open', () => {
         status.textContent = 'Połączono z WebSocketem.';
@@ -27,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     select.addEventListener('change', () => {
-        const value = select.value;
+        let value = select.value;
         if (value !== '') {
             window.electronAPI.sendWebSocketMessage({type: 'formData', value});
             status.textContent = `Wysłano: ${value}`;

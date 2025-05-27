@@ -107,5 +107,4 @@ async function loopFetch() {
 
 loopFetch();
 
-// zrobić okienko z nazwa testera
-// zrobic okienko z nazwa testu
+
