@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 // Połączenie z bazą danych SQLite
 try {
     // Poprawiona ścieżka do bazy danych
-    $db = new PDO('sqlite:' . __DIR__ . '/../../data.db');  // Zmieniamy na odpowiednią ścieżkę
+    $path = __DIR__ . '/data.db'; // bierze aktualny folder tego skryptu
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Zapytanie do bazy danych, które pobiera dane o grze oraz ciężarówce

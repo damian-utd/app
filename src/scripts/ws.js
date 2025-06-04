@@ -1,13 +1,16 @@
 //////////////////////////////////////////////////////
 // WEBSOCKET
 
+
+
 window.addEventListener('DOMContentLoaded', () => {
     let select = document.getElementById('driver-settings');
     let status = document.getElementById('status');
 
     // Inicjalizacja WS (jeśli już istnieje, nie zrobi nic)
-    // window.electronAPI.initWebSocket('ws://192.168.56.1:8080'); // ZUT LAPTOP
-    window.electronAPI.initWebSocket('ws://192.168.1.11:8080'); // DOM
+    window.electronAPI.initWebSocket('ws://82.145.72.152:8080'); // ZUT LAPTOP kabel
+    // window.electronAPI.initWebSocket('ws://192.168.56.1:8080'); // ZUT LAPTOP wifi
+    // window.electronAPI.initWebSocket('ws://192.168.1.11:8080'); // DOM
 
     window.addEventListener('ws-open', () => {
         status.textContent = 'Połączono z WebSocketem.';
@@ -28,7 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     select.addEventListener('change', () => {
-        let value = select.value;
+        let value = parseInt(select.value);
         if (value !== '') {
             window.electronAPI.sendWebSocketMessage({type: 'formData', value});
             status.textContent = `Wysłano: ${value}`;

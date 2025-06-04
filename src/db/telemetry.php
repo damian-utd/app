@@ -2,7 +2,8 @@
 
 // Database connection
 try {
-    $db = new PDO('sqlite:C:/Users/Kapi/Desktop/studia/projekt platforma/app/data.db');
+    $path = __DIR__ . '/data.db'; // bierze aktualny folder tego skryptu
+    $db = new PDO("sqlite:$path");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage() . PHP_EOL);
@@ -10,7 +11,7 @@ try {
 
 // Function to fetch and insert telemetry data
 function fetchAndStoreTelemetry($db) {
-    $url = 'http://82.145.73.127:25555/api/ets2/telemetry';
+    $url = 'http://192.168.56.1:25555/api/ets2/telemetry';
 
     // Fetch data from the API
     $json = @file_get_contents($url);

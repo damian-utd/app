@@ -1,8 +1,11 @@
 const { app, BrowserWindow, ipcMain, desktopCapturer } = require('electron');
 
 const path = require("node:path");
+const { spawn } = require('child_process');
 
 let win;
+
+let phpProcess = null;
 
 const createWindows = () => {
     win = new BrowserWindow({
@@ -25,8 +28,8 @@ const createWindows = () => {
 
 app.whenReady().then(createWindows);
 
+// obraz ets2
 app.whenReady().then(() => {
-
     ipcMain.handle('get-window-sources', async () => {
         console.log('[MAIN] Handler wywolany'); // Bez polskich znaków
 
@@ -63,4 +66,77 @@ app.whenReady().then(() => {
             app.quit();
         }
     });
+})
+
+app.whenReady().then(() => {
+    ipcMain.on('start-php', () => {
+        console.log('[MAIN] Starting telemetry.php');
+        if (!phpProcess) {
+            const scriptPath = path.resolve(__dirname, 'db/telemetry.php');
+            phpProcess = spawn('php', [scriptPath]);
+
+            phpProcess.on('error', (err) => {
+                console.error('[MAIN] Błąd przy uruchamianiu PHP:', err);
+            });
+
+            phpProcess.stdout.on('data', (data) => {
+                console.log(`PHP: ${data}`);
+            });
+        }
+    });
+
+    ipcMain.on('stop-php', () => {
+        if (phpProcess) {
+            console.log('[MAIN] Stopping telemetry.php');
+            // Zakończ pierwszy proces
+            phpProcess.kill('SIGTERM');
+            phpProcess = null;
+
+            // Teraz odpalamy raport.php
+            const reportPath = path.resolve(__dirname, 'db/raport.php');
+            const reportProcess = spawn('php', [reportPath]);
+
+            reportProcess.on('error', (err) => {
+                console.error('[MAIN] Blad przy uruchamianiu raport.php:', err);
+            });
+
+            reportProcess.stdout.on('data', (data) => {
+                console.log(`RAPORT: ${data}`);
+            });
+
+            reportProcess.on('exit', (code, signal) => {
+                console.log(`[MAIN] raport.php zakonczony (kod: ${code}, sygnal: ${signal})`);
+            });
+        }
+    });
+});
+
+
+// start-python
+let pythonProcess = null;
+
+app.whenReady().then(() => {
+    ipcMain.on('start-python', () => {
+        if (pythonProcess) {
+            console.log('Python już dziala');
+            return;
+        }
+
+        pythonProcess = spawn('python', [path.join(__dirname, '../exports/pdf.py')]);
+
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`Python stdout: ${data.toString()}`);
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Python stderr: ${data.toString()}`);
+        });
+
+        pythonProcess.on('close', (code) => {
+            console.log(`Python zakonczyl dzialanie z kodem ${code}`);
+            pythonProcess = null;
+        });
+
+        console.log('Uruchomiono Pythona');
+    })
 })

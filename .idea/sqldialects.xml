@@ -2,7 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/db/aidmed.php" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/db/getTelemetry.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/db/telemetry.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/db/telemetry.sql" dialect="SQLite" />
     <file url="file://$PROJECT_DIR$/src/sub/shortReport.html" dialect="GenericSQL" />

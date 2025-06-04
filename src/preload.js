@@ -39,5 +39,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
         } else {
             console.warn('[WS] Nie można wysłać - brak połączenia');
         }
-    }
+    },
+    startPHP: () => ipcRenderer.send('start-php'),
+    stopPHP: () => ipcRenderer.send('stop-php'),
+    startPython: () => ipcRenderer.send('start-python'),
 });

@@ -1,6 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
     let button = document.getElementById('start-stop-button');
     let timer = document.getElementById('timer-container');
+    let telemetryFlag = false;
+
     button.addEventListener('click',  (e) => {
         if (button.innerText === 'Start') {
             let {div, form} = initTestForm();
@@ -15,6 +17,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 div.remove();
                 StartToStop(button, timer);
+                window.electronAPI.startPHP();
+
 
             })
 
@@ -22,6 +26,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         else if (button.innerText === 'Stop') {
             StopToStart(button, timer);
+            window.electronAPI.stopPHP();
+            setTimeout(() => {
+                window.electronAPI.startPython();
+            }, 5000);
         }
 
 

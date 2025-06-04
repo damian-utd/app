@@ -5,12 +5,12 @@ $filename = 'telemetry_data.csv';
 $filepath = $exportDir . '/' . $filename;
 
 try {
-    $db = new PDO('sqlite:' . __DIR__ . '/../../data.db');
+    $db = new PDO('sqlite:' . __DIR__ . '/data.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Pobierz dane
     $query = "
-        SELECT 
+        SELECT
             g.timestamp,
             g.game_name,
             g.game_time,
@@ -49,15 +49,15 @@ try {
             fputcsv($file, $row);
         }
 
-        echo "✅ CSV zapisany jako: $filepath";
+        echo "CSV zapisany jako: $filepath";
     } else {
         fputcsv($file, ['Brak danych do zapisania.']);
-        echo "⚠️ Brak danych do zapisania.";
+        echo "Brak danych do zapisania.";
     }
 
     fclose($file);
 
 } catch (PDOException $e) {
-    echo "❌ Błąd bazy danych: " . $e->getMessage();
+    echo "Blad bazy danych: " . $e->getMessage();
 }
 ?>

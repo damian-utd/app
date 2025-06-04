@@ -36,7 +36,9 @@
   const status = document.getElementById('status');
   const receivedData = document.getElementById('receivedData');
 
-  const socket = new WebSocket('ws://192.168.56.1:8080'); // <- IP serwera
+  // const socket = new WebSocket('ws://192.168.1.11:8080'); // <- IP serwera DOM
+  // const socket = new WebSocket('ws://192.168.56.1:8080'); // <- IP serwera na ZUT
+  const socket = new WebSocket('ws://82.145.78.23:8080');
 
   socket.addEventListener('open', () => {
     status.textContent = 'Połączono z serwerem WebSocket.';
@@ -46,7 +48,8 @@
     try {
       const data = JSON.parse(event.data);
       if (data.type === 'formData') {
-        receivedData.textContent += `Wybrano: ${data.value}\n`;
+        receivedData.textContent = `Wybrano: ${typeof data.value}\n${data.value}\n`;
+
       } else {
         receivedData.textContent += `Inna wiadomość: ${event.data}\n`;
       }
