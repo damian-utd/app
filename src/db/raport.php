@@ -1,12 +1,18 @@
 <?php
 // Ścieżka do pliku CSV na serwerze
-$exportDir = __DIR__ . '/../../exports';
+$exportDir = __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'exports';
 $filename = 'telemetry_data.csv';
-$filepath = $exportDir . '/' . $filename;
+$filepath = $exportDir . DIRECTORY_SEPARATOR . $filename;
+
 
 try {
     $db = new PDO('sqlite:' . __DIR__ . '/data.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    if(file_exists($filepath)){
+        unlink($filepath);
+    }
+
 
     // Pobierz dane
     $query = "
@@ -37,17 +43,23 @@ try {
         mkdir($exportDir, 0777, true);
     }
 
-    // Otwórz plik do zapisu
+    // Teraz otwórz plik do zapisu
     $file = fopen($filepath, 'w');
+    if (!$file) {
+        die("Nie można otworzyć pliku do zapisu: $filepath");
+    }
+
+
 
     if ($rows && count($rows)) {
         // Nagłówki
-        fputcsv($file, array_keys($rows[0]));
+        fputcsv($file, array_keys($rows[0]), ',', '"', '\\');
 
         // Wiersze danych
         foreach ($rows as $row) {
-            fputcsv($file, $row);
+            fputcsv($file, $row, ',', '"', '\\');
         }
+
 
         echo "CSV zapisany jako: $filepath";
     } else {
@@ -56,6 +68,7 @@ try {
     }
 
     fclose($file);
+
 
 } catch (PDOException $e) {
     echo "Blad bazy danych: " . $e->getMessage();

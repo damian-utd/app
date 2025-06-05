@@ -5,6 +5,12 @@ try {
     $path = __DIR__ . '/data.db'; // bierze aktualny folder tego skryptu
     $db = new PDO("sqlite:$path");
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Czyszczenie tabel na starcie
+    $db->exec("DELETE FROM truck_telemetry");
+    $db->exec("DELETE FROM game_telemetry");
+    echo "Tabele wyczyszczone." . PHP_EOL;
+
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage() . PHP_EOL);
 }
