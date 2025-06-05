@@ -21,8 +21,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             })
-
-            // StartToStop(button, timer);
         }
         else if (button.innerText === 'Stop') {
             StopToStart(button, timer);

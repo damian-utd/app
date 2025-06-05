@@ -34,7 +34,7 @@ def save_plot_speed(df):
     plt.title('Predkosc ciezarowki w czasie')
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("plot_speed.png")
+    plt.savefig("exports/imgs/plot_speed.png")
     plt.close()
 
 def save_plot_controls(df):
@@ -44,7 +44,7 @@ def save_plot_controls(df):
     plt.title('Srednie uzycie pedalow')
     plt.ylabel('Wartosc srednia (0-1)')
     plt.tight_layout()
-    plt.savefig("plot_controls.png")
+    plt.savefig("exports/imgs/plot_controls.png")
     plt.close()
 
 def save_plot_shifter(df):
@@ -52,7 +52,7 @@ def save_plot_shifter(df):
     sns.countplot(x='shifterSlot', data=df, hue='shifterSlot', palette='coolwarm', legend=False)
     plt.title('Rozklad pozycji biegow')
     plt.tight_layout()
-    plt.savefig("plot_shifter.png")
+    plt.savefig("exports/imgs/plot_shifter.png")
     plt.close()
 
 def save_plot_models(df):
@@ -61,18 +61,29 @@ def save_plot_models(df):
     sns.countplot(y='truck_model', data=df, order=order, hue='truck_model', palette='mako', legend=False)
     plt.title('Najczesciej uzywane modele ciezarowek')
     plt.tight_layout()
-    plt.savefig("plot_models.png")
+    plt.savefig("exports/imgs/plot_models.png")
     plt.close()
 
 def save_plot_speed_by_model(df):
+    import matplotlib.pyplot as plt
+
+    if 'truck_model' not in df.columns or 'truck_speed' not in df.columns:
+        print("Brak wymaganych kolumn: 'truck_model' i 'truck_speed'")
+        return
+
     avg = df.groupby('truck_model')['truck_speed'].mean().sort_values()
-    plt.figure(figsize=(8, 4))
+
+    if avg.empty:
+        print("Brak danych do wykresu średnich prędkości.")
+        return
+
     avg.plot(kind='barh', color='darkgreen')
-    plt.title('Srednia predkosc wg modelu')
-    plt.xlabel('Predkosc (km/h)')
+    plt.xlabel("Średnia prędkość")
+    plt.title("Średnia prędkość wg modelu ciężarówki")
     plt.tight_layout()
-    plt.savefig("plot_speed_by_model.png")
+    plt.savefig("exports/imgs/plot_speed_by_model.png")
     plt.close()
+
 
 def save_plot_speed_histogram(df):
     plt.figure(figsize=(8, 4))
@@ -81,7 +92,7 @@ def save_plot_speed_histogram(df):
     plt.xlabel('Predkosc (km/h)')
     plt.ylabel('Ilosc probek')
     plt.tight_layout()
-    plt.savefig("plot_speed_histogram.png")
+    plt.savefig("exports/imgs/plot_speed_histogram.png")
     plt.close()
 
 def save_plot_pedals_boxplot(df):
@@ -90,7 +101,7 @@ def save_plot_pedals_boxplot(df):
     plt.title('Rozklad uzycia pedalow (boxplot)')
     plt.ylabel('Wartosc (0-1)')
     plt.tight_layout()
-    plt.savefig("plot_pedals_boxplot.png")
+    plt.savefig("exports/imgs/plot_pedals_boxplot.png")
     plt.close()
 
 def save_plot_corr_heatmap(df):
@@ -99,7 +110,7 @@ def save_plot_corr_heatmap(df):
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
     plt.title('Macierz korelacji')
     plt.tight_layout()
-    plt.savefig("plot_corr_heatmap.png")
+    plt.savefig("exports/imgs/plot_corr_heatmap.png")
     plt.close()
 
 # Generujemy wykresy
@@ -126,35 +137,35 @@ pdf.set_font("Arial", '', 12)
 
 # Dodaj wykresy z opisami
 pdf.cell(0, 10, remove_polish_chars("1. Predkosc ciezarowki w czasie"), ln=True)
-pdf.image("plot_speed.png", w=180)
+pdf.image("exports/imgs/plot_speed.png", w=180)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("2. Srednie uzycie gazu, hamulca i sprzegla"), ln=True)
-pdf.image("plot_controls.png", w=120)
+pdf.image("exports/imgs/plot_controls.png", w=120)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("3. Rozklad pozycji biegow"), ln=True)
-pdf.image("plot_shifter.png", w=120)
+pdf.image("exports/imgs/plot_shifter.png", w=120)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("4. Najczesciej uzywane modele ciezarowek"), ln=True)
-pdf.image("plot_models.png", w=160)
+pdf.image("exports/imgs/plot_models.png", w=160)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("5. Srednia predkosc wg modelu ciezarowki"), ln=True)
-pdf.image("plot_speed_by_model.png", w=160)
+pdf.image("exports/imgs/plot_speed_by_model.png", w=160)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("6. Histogram predkosci ciezarowki"), ln=True)
-pdf.image("plot_speed_histogram.png", w=160)
+pdf.image("exports/imgs/plot_speed_histogram.png", w=160)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("7. Rozklad uzycia pedalow (boxplot)"), ln=True)
-pdf.image("plot_pedals_boxplot.png", w=160)
+pdf.image("exports/imgs/plot_pedals_boxplot.png", w=160)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("8. Macierz korelacji wartosci telemetrycznych"), ln=True)
-pdf.image("plot_corr_heatmap.png", w=160)
+pdf.image("exports/imgs/plot_corr_heatmap.png", w=160)
 
 # Dodaj sekcję podsumowania
 pdf.add_page()
@@ -173,5 +184,5 @@ for idx, row in summary_stats.iterrows():
     pdf.cell(0, 10, f"  Max: {row['max']:.2f}", ln=True)
     pdf.ln(3)
 
-pdf.output("raport_telemetryczny.pdf")
+pdf.output("exports/raport_telemetryczny.pdf")
 print("✅ Raport zapisany jako raport_telemetryczny.pdf")
