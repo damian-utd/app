@@ -19,7 +19,9 @@ Aplikacja umożliwia zbieranie i wizualizację danych sprzętowych oraz pomiaró
 - [Electron.js](https://www.electronjs.org/)  
 - [Node.js](https://nodejs.org/)  
 - JavaScript 
-- HTML/CSS  
+- HTML/CSS
+- Python
+- PHP
 
 ---
 
