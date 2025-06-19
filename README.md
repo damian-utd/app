@@ -45,7 +45,7 @@ Aplikacja umożliwia zbieranie i wizualizację danych sprzętowych oraz pomiaró
 
 2. Zainstaluj [Node.js](https://nodejs.org/en/download/).  
 
-3. Utwórz katalog projektu i zainicjalizuj npm:
+3. Otwórz katalog projektu i zainicjalizuj npm:
    ```bash
    mkdir app
    cd app
