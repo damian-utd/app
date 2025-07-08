@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
     window.electronAPI.initWebSocket('ws://82.145.72.152:8080'); // ZUT LAPTOP kabel
     // window.electronAPI.initWebSocket('ws://192.168.56.1:8080'); // ZUT LAPTOP wifi
     // window.electronAPI.initWebSocket('ws://192.168.1.11:8080'); // DOM
+    window.electronAPI.initWebSocket('ws://82.145.73.127:8080'); // ZUT PC
 
     window.addEventListener('ws-open', () => {
         status.textContent = 'Połączono z WebSocketem.';
