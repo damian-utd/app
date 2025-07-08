@@ -116,13 +116,14 @@ app.whenReady().then(() => {
 let pythonProcess = null;
 
 app.whenReady().then(() => {
-    ipcMain.on('start-python', () => {
+    ipcMain.on('start-python', (event, param) => {
         if (pythonProcess) {
             console.log('Python już dziala');
             return;
         }
 
-        pythonProcess = spawn('python', [path.join(__dirname, '../exports/pdf.py')]);
+        const args = [path.join(__dirname, '../exports/pdf.py'), ...(Array.isArray(param) ? param : [param])];
+        pythonProcess = spawn('python', args);
 
         pythonProcess.stdout.on('data', (data) => {
             console.log(`Python stdout: ${data.toString()}`);

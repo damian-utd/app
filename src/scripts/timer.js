@@ -1,3 +1,5 @@
+// stoper
+
 let interval = null;
 
 function StartToStop(button, timer) {

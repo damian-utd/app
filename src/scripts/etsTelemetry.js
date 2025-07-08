@@ -2,6 +2,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// animacja od kierownicy i pedałów
 function wheelUpdate(gameSteer, userClutch, userBrake, userThrottle) {
     let moveLeft = document.getElementById("wheel-progress-left");
     let moveRight = document.getElementById("wheel-progress-right");
@@ -23,9 +24,12 @@ function wheelUpdate(gameSteer, userClutch, userBrake, userThrottle) {
     break_progress.style.height = `${(1-userBrake) * 110}%`;
     throttle_progress.style.height = `${(1-userThrottle) * 110}%`;
 
-    rotation.style.transform = `rotateZ(${gameSteer * 540}deg)`;
+    let wheelRange = 1080
+
+    rotation.style.transform = `rotateZ(${gameSteer * wheelRange/2}deg)`;
 }
 
+// animacja zmiany biegów
 let lastGear;
 function gearUpdate(shifterSlot) {
     // console.log(state)
@@ -71,6 +75,7 @@ function gearUpdate(shifterSlot) {
 
 }
 
+// metoda od pobierania danych telemetrycznych z API
 async function fetchData(url) {
     try {
         const response = await fetch(url);
@@ -91,11 +96,12 @@ async function fetchData(url) {
     }
 }
 
+// pelta do pobierania z api
 async function loopFetch() {
     while (true) {
         await sleep(10);
-        // const data = await fetchData("http://82.145.73.127:25555/api/ets2/telemetry"); // ZUT
-        const data = await fetchData("http://192.168.1.11:25555/api/ets2/telemetry"); // DOM
+        const data = await fetchData("http://82.145.73.127:25555/api/ets2/telemetry"); // ZUT
+        // const data = await fetchData("http://192.168.1.11:25555/api/ets2/telemetry"); // DOM
         // const data = await fetchData("http://192.168.56.1:25555/api/ets2/telemetry"); // laptop siec ZUT
 
         if (data) {

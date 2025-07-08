@@ -42,5 +42,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     startPHP: () => ipcRenderer.send('start-php'),
     stopPHP: () => ipcRenderer.send('stop-php'),
-    startPython: () => ipcRenderer.send('start-python'),
+    startPython: (param) => ipcRenderer.send('start-python', param)
 });

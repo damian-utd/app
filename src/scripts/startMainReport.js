@@ -1,8 +1,9 @@
+// obsługa przycisku start/stop dla testu
 window.addEventListener('DOMContentLoaded', () => {
     let button = document.getElementById('start-stop-button');
     let timer = document.getElementById('timer-container');
     let telemetryFlag = false;
-
+    let userData;
     button.addEventListener('click',  (e) => {
         if (button.innerText === 'Start') {
             let {div, form} = initTestForm();
@@ -10,10 +11,10 @@ window.addEventListener('DOMContentLoaded', () => {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                const formData = new FormData(form);
-                const userData = Object.fromEntries(formData.entries());
-
-                console.log(userData);
+                let formData = new FormData(form);
+                userData = Object.fromEntries(formData.entries());
+                userData = Object.values(userData);
+                console.log(userData[0]);
 
                 div.remove();
                 StartToStop(button, timer);
@@ -26,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
             StopToStart(button, timer);
             window.electronAPI.stopPHP();
             setTimeout(() => {
-                window.electronAPI.startPython();
+                window.electronAPI.startPython(userData);
             }, 5000);
         }
 
@@ -34,6 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
     })
 })
 
+// tworzenie formularza
 function initTestForm() {
     if (!document.getElementById('setNames')) {
         let div = document.createElement('div');
