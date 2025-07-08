@@ -1,3 +1,5 @@
+// Server WebSocket od ustawień wysyłanych do apki z deską rozdzielczą
+
 const WebSocket = require('ws');
 const wss = new WebSocket.Server({ port: 8080, host: '0.0.0.0' });
 
@@ -20,6 +22,6 @@ wss.on('connection', (ws) => {
     });
 });
 
-console.log('Serwer WebSocket działa na ws://localhost:8080');
+// console.log('Serwer WebSocket działa na ws://localhost:8080');
 
 // npm run server

@@ -17,7 +17,8 @@ try {
 
 // Function to fetch and insert telemetry data
 function fetchAndStoreTelemetry($db) {
-    $url = 'http://192.168.56.1:25555/api/ets2/telemetry';
+//     $url = 'http://192.168.56.1:25555/api/ets2/telemetry';
+    $url = 'http://82.145.73.127:25555/api/ets2/telemetry';
 
     // Fetch data from the API
     $json = @file_get_contents($url);

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from fpdf import FPDF
 import os
+import sys
 
 # Funkcja do zamiany polskich znaków na ASCII
 def remove_polish_chars(text):
@@ -21,8 +22,13 @@ def remove_polish_chars(text):
 base_path = os.path.dirname(__file__)
 csv_path = os.path.join(base_path, "telemetry_data.csv")
 
+userData = sys.argv[1:]
+studentName = userData[0]
+testName = userData[1]
+
 df = pd.read_csv(csv_path)
-df['timestamp'] = pd.to_datetime(df['timestamp'])
+df['timestamp'] = pd.to_datetime(df['timestamp'])  # konwersja na datetime
+df['date'] = df['timestamp'].dt.date  # nowa kolumna z samą datą
 
 # --- Funkcje generujące wykresy ---
 
@@ -113,12 +119,30 @@ def save_plot_corr_heatmap(df):
     plt.savefig("exports/imgs/plot_corr_heatmap.png")
     plt.close()
 
+
+def get_unique_filename(base_path, date_str, test_name):
+    # usuń polskie znaki z test_name w nazwie pliku
+    test_name_clean = remove_polish_chars(test_name)
+    # podstawowa nazwa pliku
+    filename = f"{date_str}_{test_name_clean}.pdf"
+    full_path = os.path.join(base_path, filename)
+
+    i = 1
+    # dopóki plik istnieje, zmieniaj nazwę
+    while os.path.exists(full_path):
+        filename = f"{date_str}_{test_name_clean}_{i}.pdf"
+        full_path = os.path.join(base_path, filename)
+        i += 1
+
+    return full_path
+
+
 # Generujemy wykresy
 save_plot_speed(df)
 save_plot_controls(df)
 save_plot_shifter(df)
-save_plot_models(df)
-save_plot_speed_by_model(df)
+# save_plot_models(df)
+# save_plot_speed_by_model(df)
 save_plot_speed_histogram(df)
 save_plot_pedals_boxplot(df)
 save_plot_corr_heatmap(df)
@@ -128,7 +152,8 @@ save_plot_corr_heatmap(df)
 class PDF(FPDF):
     def header(self):
         self.set_font("Arial", 'B', 14)
-        self.cell(0, 10, remove_polish_chars("Raport telemetryczny z gry"), ln=True, align='C')
+        self.cell(0, 10, remove_polish_chars(f"Raport telemetryczny: {testName}"), ln=True, align='C')
+        self.cell(0, 10, remove_polish_chars(f"Uzytkownik: {studentName}"), ln=True, align='C')
         self.ln(10)
 
 pdf = PDF()
@@ -147,13 +172,13 @@ pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("3. Rozklad pozycji biegow"), ln=True)
 pdf.image("exports/imgs/plot_shifter.png", w=120)
 
-pdf.ln(5)
-pdf.cell(0, 10, remove_polish_chars("4. Najczesciej uzywane modele ciezarowek"), ln=True)
-pdf.image("exports/imgs/plot_models.png", w=160)
-
-pdf.ln(5)
-pdf.cell(0, 10, remove_polish_chars("5. Srednia predkosc wg modelu ciezarowki"), ln=True)
-pdf.image("exports/imgs/plot_speed_by_model.png", w=160)
+# pdf.ln(5)
+# pdf.cell(0, 10, remove_polish_chars("4. Najczesciej uzywane modele ciezarowek"), ln=True)
+# pdf.image("exports/imgs/plot_models.png", w=160)
+#
+# pdf.ln(5)
+# pdf.cell(0, 10, remove_polish_chars("5. Srednia predkosc wg modelu ciezarowki"), ln=True)
+# pdf.image("exports/imgs/plot_speed_by_model.png", w=160)
 
 pdf.ln(5)
 pdf.cell(0, 10, remove_polish_chars("6. Histogram predkosci ciezarowki"), ln=True)
@@ -184,5 +209,20 @@ for idx, row in summary_stats.iterrows():
     pdf.cell(0, 10, f"  Max: {row['max']:.2f}", ln=True)
     pdf.ln(3)
 
-pdf.output("exports/raport_telemetryczny.pdf")
-print("✅ Raport zapisany jako raport_telemetryczny.pdf")
+
+
+
+# potem używasz tak:
+
+base_export_path = "exports"
+os.makedirs(base_export_path, exist_ok=True)  # upewnij się, że folder istnieje
+
+date_str = str(df['date'].values[0])
+
+
+
+unique_pdf_path = get_unique_filename(base_export_path, date_str, testName)
+
+pdf.output(unique_pdf_path)
+print(f"Raport zapisany jako {unique_pdf_path}")
+
